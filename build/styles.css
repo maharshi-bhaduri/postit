@@ -1,3 +1,75 @@
-.heading {
-  color: red;
+/* Background and body */
+
+body {
+  margin: 0;
+  padding: 0;
+}
+
+.parent {
+  height: 100vh;
+  padding: 0px;
+  margin: 0px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items:center;
+  background-image: linear-gradient(#98ddca ,#d8e3e7);
+}
+
+/* Text box */
+
+.pallette {
+  padding: 30px;
+  width: 450px;
+  display: flex;
+  justify-content: center;
+  align-items:center;
+  background: #f3f3f3;
+  border-radius: 25px;
+}
+
+input {
+  outline: none;
+  border: none;
+  background-color: #f3f3f3;
+  font-size: 16px;
+  text-align: center;
+  width: 350px;
+}
+
+input:focus::placeholder {
+  color: transparent;
+}
+
+input::placeholder {
+  transition: color 0.3s ease;
+}
+
+
+/* .placeholder {
+  color: gray;
+}
+
+.placeholder:focus {
+  color: transparent;
+  opacity: 1;
+  animation: fade 2s linear;
+} */
+
+
+.make-it-slow {
+  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  transition: all 0.3s ease-in-out;
+}
+
+/* Transition to a bigger shadow on hover */
+
+.make-it-slow:hover {
+  transform: scale(1.1, 1.1);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+}
+
+.pallette:hover {
+  cursor: text;
 }
