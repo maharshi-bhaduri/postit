@@ -1,18 +1,22 @@
 {
   "name": "react-components",
   "version": "1.0.0",
+  "homepage": "https://maharshi-bhaduri.github.io/postit",
   "description": "",
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
     "gh-pages": "3.2.3",
     "react": "16.11.0",
-    "react-dom": "16.11.0"
+    "react-dom": "16.11.0",
+    "react-scripts": "^5.0.1"
   },
   "devDependencies": {
     "typescript": "3.3.3"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
