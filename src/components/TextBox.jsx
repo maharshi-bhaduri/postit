@@ -14,27 +14,6 @@ function postData() {
 
 
 function TextBox() {
-    const [posts, setPosts] = useState([])
-
-    useEffect(() => {
-        getPosts();
-    }, [])
-
-    const getPosts = () => {
-        fetch('https://listnotes.forgiveandforget.workers.dev/').then(
-            response => response.json()
-        ).then(
-            data => {
-                setPosts(data)
-                setIsLoading(false)
-                console.log("post ", posts)
-            }
-        ).catch(err => {
-            setIsLoading(false)
-            console.log("An error occured. Error: ", err)
-        }
-        )
-    }
 
     return (
         <div className="pallette make-it-slow">
