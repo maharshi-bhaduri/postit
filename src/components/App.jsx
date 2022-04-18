@@ -31,14 +31,16 @@ function App() {
         )
     }
 
-    const postsRenderer = posts.map((post) => (<Post key={post.name} content={post.content} />))
+    const postsRenderer = posts.sort(
+        (a, b) => b.expiry - a.expiry
+        ).map((post) => (<Post key={post.name} content={post.content} expiry={post.expiry} />))
 
-    const content = isLoading ? <div>Loading...</div> : <div>{postsRenderer}</div>
+    const content = isLoading ? <div className="loading-card">Loading posts...</div> : <div>{postsRenderer}</div>
 
     return (
         <div className="parent">
-            <Heading />
-            <TextBox onPost={getPosts}/>
+            {/* <Heading /> */}
+            <TextBox />
             {/* <List postList={posts}/> */}
             {content}
         </div>

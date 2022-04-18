@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 
 function postData() {
-
     let content = document.getElementById('post-input').value
     if (content) {
         fetch('https://updatenote.forgiveandforget.workers.dev/', {
@@ -13,7 +12,6 @@ function postData() {
         document.getElementById('post-input').value = ''
     }
 }
-s
 
 function TextBox() {
 

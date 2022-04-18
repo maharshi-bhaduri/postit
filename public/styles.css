@@ -2,9 +2,9 @@
 
 body {
   margin: 0;
-  padding: 0;
+  padding: 20px 0 0 0;
   height: 100vh;
-  background: rgb(255, 168, 168);
+  background: rgb(255, 255, 255);
 }
 
 .parent {
@@ -22,7 +22,7 @@ body {
 
 .pallette {
   padding: 30px;
-  width: 450px;
+  width: 600px;
   display: flex;
   justify-content: center;
   align-items:center;
@@ -78,13 +78,50 @@ input::placeholder {
 
 /* Post */
 
+.loading-card {
+  margin: 10px 0 10px 0;
+  padding: 15px;
+  width: 450px;
+  display: flex;
+  align-items:center;
+  background: #d6d6d6;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
+}
+
+
 .post-card {
   margin: 10px 0 10px 0;
   padding: 15px;
   width: 450px;
   display: flex;
-  justify-content: center;
   align-items:center;
-  background: #f3f3f3;
-  border-radius: 15px;
+  background: #d6d6d6;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
+}
+
+/* Time Icon */
+
+.timebox {
+  position: absolute;
+  top: 8px;
+  right: 10px;
+  display: flex;
+}
+
+.timeleft-icon {
+  height: 10px;
+  width: 10px;
+}
+.timeleft-text {
+  font-size: 10px;
+  position: absolute;
+  top: -12px;
+  right: 12px;
+  font-family: system-ui;
+  font-weight: 500;
+  width: 42px;
 }
