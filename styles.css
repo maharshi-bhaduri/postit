@@ -2,9 +2,13 @@
 
 body {
   margin: 0;
-  padding: 20px 0 0 0;
+  padding: 0;
   height: 100vh;
   background: rgb(255, 255, 255);
+}
+
+#root {
+  padding-top: 25px;
 }
 
 .parent {
@@ -87,17 +91,19 @@ input::placeholder {
   background: #d6d6d6;
   border-radius: 10px;
   position: relative;
+  font-family: sans-serif;
   box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
 }
 
 
 .post-card {
   margin: 10px 0 10px 0;
-  padding: 15px;
+  padding: 25px 15px 10px 15px;
   width: 450px;
   display: flex;
-  align-items:center;
-  background: #d6d6d6;
+  align-items: center;
+  background: #f8f6cd;
+  font-family: sans-serif;
   border-radius: 10px;
   position: relative;
   box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
