@@ -20,7 +20,6 @@ function App() {
             data => {
                 setPosts(data)
                 setIsLoading(false)
-                console.log("post ", posts)
                 posts.sort((a, b) => {
                     return a.expiry - b.expiry;
                 });

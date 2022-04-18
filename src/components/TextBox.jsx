@@ -1,17 +1,19 @@
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 
 function postData() {
 
     let content = document.getElementById('post-input').value
-    fetch('https://updatenote.forgiveandforget.workers.dev/', {
-        'method': 'post',
-        'body': JSON.stringify({
-            noteContent: content
+    if (content) {
+        fetch('https://updatenote.forgiveandforget.workers.dev/', {
+            'method': 'post',
+            'body': JSON.stringify({
+                noteContent: content
+            })
         })
-    })
-    document.getElementById('post-input').value = ''
+        document.getElementById('post-input').value = ''
+    }
 }
-
+s
 
 function TextBox() {
 
