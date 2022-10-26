@@ -14,14 +14,8 @@ function postData() {
 }
 
 function TextBox() {
-
     return (
         <div className="pallette make-it-slow">
-            {/* <div className="input" contentEditable id="input">
-            <span className="placeholder" id="placeholder">
-                Just post it ✔
-            </span>
-            </div> */}
             <input id="post-input" placeholder="Just post it ✔" autoComplete="off" />
             <button type="submit" onClick={() => postData()}>Post</button>
         </div>

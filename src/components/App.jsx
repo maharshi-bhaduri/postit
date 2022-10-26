@@ -39,9 +39,7 @@ function App() {
 
     return (
         <div className="parent">
-            {/* <Heading /> */}
             <TextBox />
-            {/* <List postList={posts}/> */}
             {content}
         </div>
     );
