@@ -1,10 +1,10 @@
 import React from "react";
 
 function Post(props) {
-  var time = (Date.now()+(60000*60)-props.expiry)/1000
+  var time = (Date.now()+(24*60000*60)-props.expiry)/1000
   time = time < 0 ? 0 : time
   var timeInMins = String(Math.floor(time/60)) + 'm ago'
-  var textColor = time < 3000 ? (time < 600 ? {color:'#1000ff'} : null) : {color:'#ff0000'}
+  var textColor = time < 72000 ? (time < 600 ? {color:'#1000ff'} : null) : {color:'#ff0000'}
 
   return (
     <div className="post-card" style={null}>
