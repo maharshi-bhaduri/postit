@@ -4,11 +4,11 @@ body {
   margin: 0;
   padding: 0;
   height: 100vh;
-  background: rgb(255, 255, 255);
+  background: #404040;
 }
 
 #root {
-  padding-top: 25px;
+  
 }
 
 .parent {
@@ -20,6 +20,21 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items:center;
+  background-color: #404040;
+}
+
+/* Nav bar */
+
+.nav-container {
+  width: 100%;
+  height: 60px;
+  background-color: #f8f6cd;
+  margin-bottom: 30px;
+}
+
+.logo {
+  height:100%;
+  margin-left: 10px;
 }
 
 /* Text box */
@@ -30,7 +45,7 @@ body {
   display: flex;
   justify-content: center;
   align-items:center;
-  background: #f3f3f3;
+  background: #f8f6cd;
   border-radius: 25px;
   margin-bottom: 10px;
 }
@@ -38,7 +53,7 @@ body {
 input {
   outline: none;
   border: none;
-  background-color: #f3f3f3;
+  background-color: #f8f6cd;
   font-size: 20px;
   text-align: center;
   width: 350px;
@@ -82,6 +97,12 @@ input::placeholder {
 
 /* Post */
 
+.post-container {
+  display: flex;
+  flex-wrap: wrap;
+  width: 80%;
+}
+
 .loading-card {
   margin: 10px 0 10px 0;
   padding: 15px;
@@ -97,9 +118,9 @@ input::placeholder {
 
 
 .post-card {
-  margin: 10px 0 10px 0;
+  margin: 10px;
   padding: 25px 15px 10px 15px;
-  width: 450px;
+  min-width: 80px;
   display: flex;
   align-items: center;
   background: #f8f6cd;
@@ -116,6 +137,8 @@ input::placeholder {
   top: 8px;
   right: 10px;
   display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
 }
 
 .timeleft-icon {
@@ -124,10 +147,8 @@ input::placeholder {
 }
 .timeleft-text {
   font-size: 10px;
-  position: absolute;
-  top: -12px;
-  right: 12px;
   font-family: system-ui;
   font-weight: 500;
-  width: 42px;
+  margin: 0;
+  margin-right: 3px;
 }
