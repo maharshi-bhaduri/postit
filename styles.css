@@ -121,13 +121,14 @@ input::placeholder {
   margin: 10px;
   padding: 25px 15px 10px 15px;
   min-width: 80px;
-  display: flex;
+  display: inline-block;
   align-items: center;
   background: #f8f6cd;
   font-family: sans-serif;
   border-radius: 10px;
   position: relative;
   box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
+  word-wrap: break-word;
 }
 
 /* Time Icon */
