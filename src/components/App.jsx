@@ -2,7 +2,9 @@ import React, { useEffect, useState } from "react";
 import Heading from "./Heading";
 import List from "./List";
 import TextBox from "./TextBox";
+import NavBar from "./NavBar";
 import Post from './Post'
+
 
 function App() {
 
@@ -35,10 +37,11 @@ function App() {
         (a, b) => b.expiry - a.expiry
         ).map((post) => (<Post key={post.name} content={post.content} expiry={post.expiry} />))
 
-    const content = isLoading ? <div className="loading-card">Loading posts...</div> : <div>{postsRenderer}</div>
+    const content = isLoading ? <div className="loading-card">Loading posts...</div> : <div className="post-container">{postsRenderer}</div>
 
     return (
         <div className="parent">
+            <NavBar /> 
             <TextBox />
             {content}
         </div>
