@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from "react";
-import Heading from "./Heading";
-import List from "./List";
+import React, { useEffect, useReducer, useState } from "react";
+import Loader from "./Loader";
 import TextBox from "./TextBox";
 import NavBar from "./NavBar";
-import Post from './Post'
+import Post from './Post';
+import AddPostModal from "./AddPostModal";
 
 
 function App() {
 
     const [isLoading, setIsLoading] = useState(true)
+    const [addPostFlag, setAddPostFlag] = useState(false)
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
@@ -33,17 +34,39 @@ function App() {
         )
     }
 
+    function addPost_old(post) {
+        setPosts(oldposts => {
+            return [...oldposts, post];
+        });
+    }
+
+    function addPost(post) {
+        setAddPostFlag(false);
+        setPosts(oldposts => {
+            return [...oldposts, post];
+        });
+    }
+
+    function startPostModal() {
+        setAddPostFlag(true)
+    }
+
     const postsRenderer = posts.sort(
         (a, b) => b.expiry - a.expiry
-        ).map((post) => (<Post key={post.name} content={post.content} expiry={post.expiry} />))
+    ).map((post) => (<Post key={post.name} content={post.content} expiry={post.expiry} />))
 
-    const content = isLoading ? <div className="loading-card">Loading posts...</div> : <div className="post-container">{postsRenderer}</div>
+    const content = isLoading ? <Loader /> : postsRenderer
 
     return (
         <div className="parent">
-            <NavBar /> 
-            <TextBox />
-            {content}
+            <NavBar triggerPostModal={startPostModal} />
+            {/* <TextBox onAdd={addPost} /> */}
+            <div className="post-container">
+                {isLoading ? <Loader /> : content}
+            </div>
+            {
+                addPostFlag && <AddPostModal onAdd={addPost} />
+            }
         </div>
     );
 }

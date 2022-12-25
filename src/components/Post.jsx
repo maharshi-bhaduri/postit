@@ -1,7 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 
 function Post(props) {
-  var time = (Date.now()+(24*60000*60)-props.expiry)/1000
+  setInterval(updateTime, 1000)
+  const [currentTime, setCurrentTime] = useState(Date.now())
+
+  function updateTime() {
+    const newCurrentTime = Date.now()
+    setCurrentTime(newCurrentTime)
+  }
+  
+  var time = (currentTime+(24*60000*60)-props.expiry)/1000
   time = time < 0 ? 0 : time
   var timeInMins = Math.floor(time / 60)
   var hrs = Math.floor(timeInMins / 60)

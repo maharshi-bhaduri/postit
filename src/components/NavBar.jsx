@@ -1,7 +1,11 @@
 import React from "react";
 
 
-function NavBar() {
+function NavBar(props) {
+    function triggerAddPost() {
+        props.triggerPostModal(true)
+    }
+
     const logo = require('../img/logo_b.png');
     const addPost = require('../img/add_post.png');
     const addPostHover = require('../img/add_post_hover.png');
@@ -10,13 +14,13 @@ function NavBar() {
         <div className="nav-container">
             <img src={logo} className="logo" draggable="false"></img>
             <img src={addPost} className="add-post"
-            onMouseOver={e => (e.currentTarget.src = addPostHover)}
-            onMouseLeave={e => (e.currentTarget.src = addPost)}
-            onMouseDown={e => (e.currentTarget.src = addPostClick)}
-            onMouseUp={e => (e.currentTarget.src = addPostHover)}
+                onMouseOver={e => (e.currentTarget.src = addPostHover)}
+                onMouseLeave={e => (e.currentTarget.src = addPost)}
+                onMouseDown={e => (e.currentTarget.src = addPostClick)}
+                onMouseUp={e => (e.currentTarget.src = addPost)}
                 draggable="false"
+                onClick={triggerAddPost}
             ></img>
-            
         </div>
     );
 }
