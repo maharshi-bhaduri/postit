@@ -7,9 +7,7 @@ body {
   background: #404040;
 }
 
-#root {
-  
-}
+#root {}
 
 .parent {
   height: 100%;
@@ -19,7 +17,7 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   background-color: #404040;
 }
 
@@ -39,7 +37,7 @@ body {
 }
 
 .logo {
-  height:100%;
+  height: 100%;
   margin-left: 10px;
   cursor: pointer;
 }
@@ -58,7 +56,7 @@ body {
   width: 600px;
   display: flex;
   justify-content: center;
-  align-items:center;
+  align-items: center;
   background: #f8f6cd;
   border-radius: 25px;
   margin-bottom: 10px;
@@ -95,7 +93,7 @@ input::placeholder {
 
 
 .make-it-slow {
-  box-shadow: 0 1px 2px rgba(0,0,0,0.15);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.15);
   transition: all 0.3s ease-in-out;
 }
 
@@ -103,7 +101,7 @@ input::placeholder {
 
 .make-it-slow:hover {
   transform: scale(1.1, 1.1);
-  box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
 }
 
 .pallette:hover {
@@ -116,17 +114,19 @@ input::placeholder {
   display: flex;
   flex-wrap: wrap;
   width: 80%;
+  margin-top: 80px;
+  align-items: center;
 }
 
 .loading-card {
   margin: 10px 0 10px 0;
   padding: 15px;
-  width: 450px;
   display: flex;
-  align-items:center;
+  align-items: center;
   background: #d6d6d6;
   border-radius: 10px;
-  position: relative;
+  position: absolute;
+  top: 80px;
   font-family: sans-serif;
   box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
 }
@@ -144,6 +144,7 @@ input::placeholder {
   position: relative;
   box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
   word-wrap: break-word;
+  white-space: pre-wrap;
 }
 
 /* Time Icon */
@@ -161,10 +162,61 @@ input::placeholder {
   height: 10px;
   width: 10px;
 }
+
 .timeleft-text {
   font-size: 10px;
   font-family: system-ui;
   font-weight: 500;
   margin: 0;
   margin-right: 3px;
+}
+
+/* Add post  */
+.overlay {
+  width: 100vw;
+  height: 100vh;
+  background: #282828bd;
+  cursor: pointer;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  overflow-y: hidden;
+}
+
+.add-post-modal {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  z-index: 2;
+  padding: 30px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8f6cd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 80px;
+  box-shadow: 0px 0px 5px black;
+  translate: -50% -50%;
+}
+
+.modal-text-area {
+  padding: 10px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #f8f6cd;
+  border-radius: 10px;
+  margin-bottom: 30px;
+}
+
+.post-sub-button {
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
