@@ -151,6 +151,15 @@ input::placeholder {
   white-space: pre-wrap;
 }
 
+.see-more {
+  cursor: pointer;
+}
+
+.see-more:hover {
+  text-decoration: solid underline;
+  color: rgb(83, 83, 83);
+}
+
 /* Time Icon */
 
 .timebox {
@@ -238,4 +247,23 @@ input::placeholder {
   position: absolute;
   bottom: 12px;
   right: 12px;
+}
+
+.expand-post-modal {
+  position: fixed;
+  top: 40%;
+  left: 50%;
+  z-index: 2;
+  padding: 50px 30px;
+  width: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: #f8f6cd;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 80px;
+  box-shadow: 0px 0px 5px black;
+  translate: -50% -50%;
 }
