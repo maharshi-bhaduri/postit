@@ -9,6 +9,10 @@ body {
 
 #root {}
 
+h2 {
+  font-family: sans-serif;
+}
+
 .parent {
   height: 100%;
   padding: 0px;
@@ -189,7 +193,7 @@ input::placeholder {
   top: 40%;
   left: 50%;
   z-index: 2;
-  padding: 30px;
+  padding: 60px 30px 30px 30px;
   width: 600px;
   display: flex;
   flex-direction: column;
@@ -201,6 +205,13 @@ input::placeholder {
   margin-top: 80px;
   box-shadow: 0px 0px 5px black;
   translate: -50% -50%;
+}
+
+.modal-heading {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  margin: 0px
 }
 
 .modal-text-area {

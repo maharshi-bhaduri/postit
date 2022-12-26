@@ -2,36 +2,49 @@ import React, { useEffect, useState } from "react";
 
 
 function AddPostModal(props) {
+  var [disableInput, setDisableInput] = useState(false)
   function closeModal() {
     props.onClose()
     document.getElementById('post-input').value = ''
   }
   function addPost() {
+    setDisableInput(true)
     let content = document.getElementById('post-input').value.trim()
-
+    var noteId = ""
     if (content) {
       fetch('https://updatenote.forgiveandforget.workers.dev/', {
         'method': 'post',
         'body': JSON.stringify({
           noteContent: content
         })
-      })
-      var tempData = {
-        'name': Date.now(),
-        'content': content,
-        'expiry': String(Date.now() + (24 * 60000 * 60))
-      }
-      props.onAdd(tempData)
+      }).then(
+        response => response.json()
+      ).then(
+        data => {
+          noteId = data['noteId']
+          var tempData = {
+            'name': noteId,
+            'metadata': {
+              'value': content,
+              'expiry': String(Date.now() + (24 * 60000 * 60))
+            }
+          }
+          props.onAdd(tempData)
+        }
+      )
     }
-    document.getElementById('post-input').value = ''
+    else {
+      props.onClose()
+    }
   }
   return (
     <div className="modal">
       <div className="overlay" onClick={closeModal}></div>
       <div id='modal' className="add-post-modal">
-        <textarea id='post-input' className="modal-text-area" placeholder="Enter your post here...">
+        <h2 className="modal-heading">Add Post</h2>
+        <textarea id='post-input' className="modal-text-area" autoFocus placeholder="Enter your post here...">
         </textarea>
-        <button className="post-sub-button" onClick={addPost}>
+        <button className="post-sub-button" disabled={disableInput} onClick={addPost}>
           Post
         </button>
       </div>

@@ -10,7 +10,7 @@ function Post(props) {
   }
 
   function onDeleteClick() {
-    props.onDelete(props.name, props.id)
+    props.onDelete(props.name)
   }
 
   var time = (currentTime + (24 * 60000 * 60) - props.expiry) / 1000

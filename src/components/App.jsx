@@ -41,15 +41,16 @@ function App() {
         });
     }
 
-    function deletePost(name, id) {
+    function deletePost(deleteName) {
         fetch('https://deletenote.forgiveandforget.workers.dev/', {
             'method': 'post',
             'body': JSON.stringify({
-                noteId: name
+                noteId: deleteName
             })
         })
+        console.log(posts)
         setPosts(oldposts => {
-            return oldposts.filter((item, index) => index !== id);
+            return oldposts.filter((item) => { return item.name !== deleteName });
         });
     }
 
@@ -62,8 +63,8 @@ function App() {
     }
 
     const postsRenderer = posts.sort(
-        (a, b) => b.expiry - a.expiry
-    ).map((post, index) => (<Post onDelete={deletePost} id={index} key={post.name} name={post.name} content={post.content} expiry={post.expiry} />))
+        (a, b) => b.metadata.expiry - a.metadata.expiry
+    ).map((post, index) => (<Post onDelete={deletePost} id={index} key={post.name} name={post.name} content={post.metadata.value} expiry={post.metadata.expiry} />))
 
     const content = isLoading ? <Loader /> : postsRenderer
 
