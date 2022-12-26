@@ -134,7 +134,7 @@ input::placeholder {
 
 .post-card {
   margin: 10px;
-  padding: 25px 15px 10px 15px;
+  padding: 25px 15px 40px 15px;
   min-width: 80px;
   display: inline-block;
   align-items: center;
@@ -213,10 +213,18 @@ input::placeholder {
   background: #f8f6cd;
   border-radius: 10px;
   margin-bottom: 30px;
+  font-family: sans-serif;
+  font-size: large;
 }
 
 .post-sub-button {
   position: absolute;
   right: 20px;
   bottom: 20px;
+}
+
+.delete-button {
+  position: absolute;
+  bottom: 12px;
+  right: 12px;
 }

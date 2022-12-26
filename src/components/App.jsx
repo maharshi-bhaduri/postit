@@ -34,17 +34,27 @@ function App() {
         )
     }
 
-    function addPost_old(post) {
-        setPosts(oldposts => {
-            return [...oldposts, post];
-        });
-    }
-
     function addPost(post) {
         setAddPostFlag(false);
         setPosts(oldposts => {
             return [...oldposts, post];
         });
+    }
+
+    function deletePost(name, id) {
+        fetch('https://deletenote.forgiveandforget.workers.dev/', {
+            'method': 'post',
+            'body': JSON.stringify({
+                noteId: name
+            })
+        })
+        setPosts(oldposts => {
+            return oldposts.filter((item, index) => index !== id);
+        });
+    }
+
+    function closeModal() {
+        setAddPostFlag(false);
     }
 
     function startPostModal() {
@@ -53,7 +63,7 @@ function App() {
 
     const postsRenderer = posts.sort(
         (a, b) => b.expiry - a.expiry
-    ).map((post) => (<Post key={post.name} content={post.content} expiry={post.expiry} />))
+    ).map((post, index) => (<Post onDelete={deletePost} id={index} key={post.name} name={post.name} content={post.content} expiry={post.expiry} />))
 
     const content = isLoading ? <Loader /> : postsRenderer
 
@@ -65,7 +75,7 @@ function App() {
                 {isLoading ? <Loader /> : content}
             </div>
             {
-                addPostFlag && <AddPostModal onAdd={addPost} />
+                addPostFlag && <AddPostModal onAdd={addPost} onClose={closeModal} />
             }
         </div>
     );

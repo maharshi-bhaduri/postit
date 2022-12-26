@@ -1,5 +1,13 @@
 import React, { useState, useEffect } from "react";
 
+async function hash(str) {
+    const buffer = new TextEncoder('utf-8').encode(str);
+    const digest = await crypto.subtle.digest('SHA-1', buffer);
+
+    // Convert digest to hex string
+    const result = Array.from(new Uint8Array(digest)).map(x => x.toString(16).padStart(2, '0')).join('');
+    return result;
+}
 
 function TextBox(props) {
     function postData() {
@@ -13,9 +21,9 @@ function TextBox(props) {
             })
         }
         var tempData = {
-            'name': Date.now(),
+            'name': hash(String(Date.now()) + String(Math.floor(Math.random() * 1000))),
             'content': content,
-            'expiry': String(Date.now()+(24*60000*60))
+            'expiry': String(Date.now() + (24 * 60000 * 60))
         }
         props.onAdd(tempData)
         document.getElementById('post-input').value = ''
