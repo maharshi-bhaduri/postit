@@ -1,6 +1,6 @@
 import React, { useEffect, useReducer, useState } from "react";
 import Loader from "./Loader";
-import TextBox from "./TextBox";
+import ExpandPostModal from "./ExpandPostModal";
 import NavBar from "./NavBar";
 import Post from './Post';
 import AddPostModal from "./AddPostModal";
@@ -10,6 +10,7 @@ function App() {
 
     const [isLoading, setIsLoading] = useState(true)
     const [addPostFlag, setAddPostFlag] = useState(false)
+    const [expandPostFlag, setExpandPostFlag] = useState('')
     const [posts, setPosts] = useState([])
 
     useEffect(() => {
@@ -56,15 +57,31 @@ function App() {
 
     function closeModal() {
         setAddPostFlag(false);
+        setExpandPostFlag('')
     }
 
     function startPostModal() {
         setAddPostFlag(true)
     }
 
+    function expandPost(expandPostName) {
+        setExpandPostFlag(expandPostName)
+        console.log(expandPostFlag)
+    }
+
     const postsRenderer = posts.sort(
         (a, b) => b.metadata.expiry - a.metadata.expiry
-    ).map((post, index) => (<Post onDelete={deletePost} id={index} key={post.name} name={post.name} content={post.metadata.value} expiry={post.metadata.expiry} />))
+    ).map(
+        (post, index) => (
+            <Post onExpand={expandPost}
+                onDelete={deletePost}
+                id={index}
+                key={post.name}
+                name={post.name}
+                content={post.metadata.value}
+                expiry={post.metadata.expiry} />
+        )
+    )
 
     const content = isLoading ? <Loader /> : postsRenderer
 
@@ -78,6 +95,10 @@ function App() {
             {
                 addPostFlag && <AddPostModal onAdd={addPost} onClose={closeModal} />
             }
+            {
+                expandPostFlag && <ExpandPostModal onDelete={deletePost} onClose={closeModal} name={expandPostFlag} />
+            }
+
         </div>
     );
 }

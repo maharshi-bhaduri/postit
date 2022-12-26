@@ -13,6 +13,10 @@ function Post(props) {
     props.onDelete(props.name)
   }
 
+  function expand() {
+    props.onExpand(props.name)
+  }
+
   var time = (currentTime + (24 * 60000 * 60) - props.expiry) / 1000
   time = time < 0 ? 0 : time
   var timeInMins = Math.floor(time / 60)
@@ -25,7 +29,11 @@ function Post(props) {
 
   return (
     <div className="post-card" style={null}>
-      {props.content}
+      {props.content.substring(0, 250)}
+      {
+        props.content.length > 250 &&
+        <p className='see-more' onClick={expand}>... See more</p>
+      }
       <div className="timebox">
         <img className="timeleft-icon" src={require('../img/clock.png')} />
         <p className="timeleft-text" style={textColor}>{finalTime}</p>

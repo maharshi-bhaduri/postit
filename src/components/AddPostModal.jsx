@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 
 function AddPostModal(props) {
   var [disableInput, setDisableInput] = useState(false)
+  var expiry = Date.now() + (24 * 60000 * 60)
   function closeModal() {
     props.onClose()
     document.getElementById('post-input').value = ''
@@ -15,7 +16,8 @@ function AddPostModal(props) {
       fetch('https://updatenote.forgiveandforget.workers.dev/', {
         'method': 'post',
         'body': JSON.stringify({
-          noteContent: content
+          'noteContent': content,
+          'expiry': expiry
         })
       }).then(
         response => response.json()
@@ -26,7 +28,7 @@ function AddPostModal(props) {
             'name': noteId,
             'metadata': {
               'value': content,
-              'expiry': String(Date.now() + (24 * 60000 * 60))
+              'expiry': expiry
             }
           }
           props.onAdd(tempData)
