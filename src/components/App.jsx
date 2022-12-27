@@ -66,7 +66,6 @@ function App() {
 
     function expandPost(expandPostName) {
         setExpandPostFlag(expandPostName)
-        console.log(expandPostFlag)
     }
 
     const postsRenderer = posts.sort(

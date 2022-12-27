@@ -32,9 +32,9 @@ function Post(props) {
       {props.content.substring(0, 250)}
       {
         props.content.length > 250 &&
-        <p className='see-more' onClick={expand}>... See more</p>
+        <p className='read-more' onClick={expand}>... Read more</p>
       }
-      <div className="timebox">
+      <div className="timebox top-right">
         <img className="timeleft-icon" src={require('../img/clock.png')} />
         <p className="timeleft-text" style={textColor}>{finalTime}</p>
       </div>

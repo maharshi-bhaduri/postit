@@ -44,6 +44,10 @@ function AddPostModal(props) {
       <div className="overlay" onClick={closeModal}></div>
       <div id='modal' className="add-post-modal">
         <h2 className="modal-heading">Add Post</h2>
+        <button className="btn-top-right"
+          onClick={closeModal}>
+          Close
+        </button>
         <textarea id='post-input' className="modal-text-area" autoFocus placeholder="Enter your post here...">
         </textarea>
         <button className="post-sub-button" disabled={disableInput} onClick={addPost}>
