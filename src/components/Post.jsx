@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import IconButton from '@mui/material/IconButton';
+// import IconButton from '@mui/icons-material/*';
+
 
 function Post(props) {
   setInterval(updateTime, 1000)
@@ -40,9 +44,11 @@ function Post(props) {
       </div>
       {
         props.name.length == 40 &&
-        <button className="delete-button" onClick={onDeleteClick}>
-          Delete
-        </button>
+        <div className="delete-button">
+          <IconButton aria-label="delete" onClick={onDeleteClick}>
+            <DeleteIcon />
+          </IconButton>
+        </div>
       }
     </div>
   );

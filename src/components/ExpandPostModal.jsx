@@ -1,4 +1,7 @@
 import React, { useState, useEffect } from "react";
+import DeleteIcon from '@mui/icons-material/Delete';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import IconButton from '@mui/material/IconButton';
 
 
 function ExpandPostModal(props) {
@@ -49,17 +52,16 @@ function ExpandPostModal(props) {
     }, [])
 
 
-
-
     return (
         <div className="modal">
             <div className="overlay" onClick={closeModal}
             ></div>
             <div id='modal' className="expand-post-modal ">
-                <button className="btn-top-right"
-                    onClick={closeModal}>
-                    Close
-                </button>
+                <div className="btn-top-right">
+                    <IconButton onClick={closeModal} >
+                        <CloseRoundedIcon fontSize="large" />
+                    </IconButton>
+                </div>
                 <div className="modal-content">
                     {noteContent}
                 </div>
@@ -67,10 +69,11 @@ function ExpandPostModal(props) {
                     <img className="timeleft-icon" src={require('../img/clock.png')} />
                     <p className="timeleft-text" style={textColor}>{expiryString}</p>
                 </div>
-                <button className="delete-button"
-                    onClick={onDeleteClick}>
-                    Delete
-                </button>
+                <div className="delete-button">
+                    <IconButton aria-label="delete" onClick={onDeleteClick}>
+                        <DeleteIcon />
+                    </IconButton>
+                </div>
             </div>
         </div>
     );

@@ -191,8 +191,8 @@ input::placeholder {
 
 .btn-top-right {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 5px;
+  right: 5px;
 }
 
 .timeleft-text {
@@ -258,14 +258,14 @@ input::placeholder {
 
 .post-sub-button {
   position: absolute;
-  right: 20px;
-  bottom: 20px;
+  right: 5px;
+  bottom: 5px;
 }
 
 .delete-button {
   position: absolute;
-  bottom: 15px;
-  right: 15px;
+  bottom: 5px;
+  right: 5px;
 }
 
 .expand-post-modal {

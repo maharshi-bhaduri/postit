@@ -1,4 +1,7 @@
 import React, { useEffect, useState } from "react";
+import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import IconButton from '@mui/material/IconButton';
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
 
 function AddPostModal(props) {
@@ -44,15 +47,18 @@ function AddPostModal(props) {
       <div className="overlay" onClick={closeModal}></div>
       <div id='modal' className="add-post-modal">
         <h2 className="modal-heading">Add Post</h2>
-        <button className="btn-top-right"
-          onClick={closeModal}>
-          Close
-        </button>
+        <div className="btn-top-right">
+          <IconButton disabled={disableInput} onClick={closeModal} >
+            <CloseRoundedIcon fontSize="large" />
+          </IconButton>
+        </div>
         <textarea id='post-input' className="modal-text-area" autoFocus placeholder="Enter your post here...">
         </textarea>
-        <button className="post-sub-button" disabled={disableInput} onClick={addPost}>
-          Post
-        </button>
+        <div className="post-sub-button">
+          <IconButton disabled={disableInput} onClick={addPost} >
+            <AddCircleRoundedIcon fontSize="large" />
+          </IconButton>
+        </div>
       </div>
     </div>
   );
