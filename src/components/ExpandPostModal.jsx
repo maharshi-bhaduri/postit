@@ -29,7 +29,9 @@ function ExpandPostModal(props) {
             <div className="overlay" onClick={closeModal}
             ></div>
             <div id='modal' className="expand-post-modal ">
-                {noteContent}
+                <div className="modal-content">
+                    {noteContent}
+                </div>
                 <button className="post-sub-button"
                     onClick={onDeleteClick}>
                     Delete
