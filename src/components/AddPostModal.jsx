@@ -2,25 +2,39 @@ import React, { useEffect, useState } from "react";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import IconButton from '@mui/material/IconButton';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import FormControl from '@mui/material/FormControl';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 
 function AddPostModal(props) {
   var [disableInput, setDisableInput] = useState(false)
-  var expiry = Date.now() + (24 * 60000 * 60)
+  var [expiryTime, setExpiryTime] = useState(-1)
+  var expiry = -1
+  if (expiryTime !== -1) {
+    expiry = Date.now() + (expiryTime * 60000 * 60)
+  }
+
   function closeModal() {
     props.onClose()
     document.getElementById('post-input').value = ''
+  }
+  function handleExpiryChange(event) {
+    console.log(event.target.value)
+    setExpiryTime(event.target.value)
   }
   function addPost() {
     setDisableInput(true)
     let content = document.getElementById('post-input').value.trim()
     var noteId = ""
     if (content) {
+      console.log(expiryTime == -1 ? -1 : (Date.now() + (expiryTime * 60000 * 60)))
       fetch('https://updatenote.forgiveandforget.workers.dev/', {
         'method': 'post',
         'body': JSON.stringify({
           'noteContent': content,
-          'expiry': expiry
+          'expiry': expiryTime == -1 ? -1 : (Date.now() + (expiryTime * 60000 * 60)),
+          'postTime': Date.now()
         })
       }).then(
         response => response.json()
@@ -31,7 +45,8 @@ function AddPostModal(props) {
             'name': noteId,
             'metadata': {
               'value': content,
-              'expiry': expiry
+              'expiry': expiry,
+              'postTime': Date.now()
             }
           }
           props.onAdd(tempData)
@@ -55,6 +70,15 @@ function AddPostModal(props) {
         <textarea id='post-input' className="modal-text-area" autoFocus placeholder="Enter your post here...">
         </textarea>
         <div className="post-sub-button">
+          <div className="expiry-selector-container">
+            <label>Expire post:</label>
+            <select name="expiryTime" className="expiry-time-selector" onChange={handleExpiryChange} >
+              <option valsue={-1}>Never</option>
+              <option value={1}>1 hour</option>
+              <option value={12}>12 hours</option>
+              <option value={24}>24 hours</option>
+            </select>
+          </div>
           <IconButton disabled={disableInput} onClick={addPost} >
             <AddCircleRoundedIcon fontSize="large" />
           </IconButton>

@@ -12,7 +12,14 @@ function App() {
     const [addPostFlag, setAddPostFlag] = useState(false)
     const [expandPostFlag, setExpandPostFlag] = useState('')
     const [posts, setPosts] = useState([])
+    const [currentTime, setCurrentTime] = useState(Date.now())
 
+    function updateTime() {
+        const newCurrentTime = Date.now();
+        setCurrentTime(newCurrentTime);
+    }
+
+    setInterval(updateTime, 1000)
     useEffect(() => {
         getPosts();
     }, [])
@@ -49,7 +56,6 @@ function App() {
                 noteId: deleteName
             })
         })
-        console.log(posts)
         setPosts(oldposts => {
             return oldposts.filter((item) => { return item.name !== deleteName });
         });
@@ -58,6 +64,7 @@ function App() {
     function closeModal() {
         setAddPostFlag(false);
         setExpandPostFlag('')
+        console.log(posts)
     }
 
     function startPostModal() {
@@ -69,7 +76,7 @@ function App() {
     }
 
     const postsRenderer = posts.sort(
-        (a, b) => b.metadata.expiry - a.metadata.expiry
+        (a, b) => b.metadata.postTime - a.metadata.postTime
     ).map(
         (post, index) => (
             <Post onExpand={expandPost}
@@ -78,7 +85,8 @@ function App() {
                 key={post.name}
                 name={post.name}
                 content={post.metadata.value}
-                expiry={post.metadata.expiry} />
+                expiry={post.metadata.expiry}
+                postTime={post.metadata.postTime || -1} />
         )
     )
 

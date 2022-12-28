@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
-// import IconButton from '@mui/icons-material/*';
 
 
 function Post(props) {
@@ -20,16 +19,31 @@ function Post(props) {
   function expand() {
     props.onExpand(props.name)
   }
+  var postTimeRecorded = 0
+  var datePosted = new Date()
+  var finalTime = ''
 
-  var time = (currentTime + (24 * 60000 * 60) - props.expiry) / 1000
-  time = time < 0 ? 0 : time
-  var timeInMins = Math.floor(time / 60)
-  var hrs = Math.floor(timeInMins / 60)
-  var mns = timeInMins % 60
+  if (props.postTime !== -1) {
+    postTimeRecorded = props.postTime
+  }
+  else {
+    postTimeRecorded = currentTime + (24 * 60000 * 60)
+  }
+  var time = (currentTime - postTimeRecorded) / 1000
+  if (time > 86400) {
+    datePosted = new Date(postTimeRecorded)
+    finalTime = datePosted.getDate + '/' + datePosted.getMonth() + '/' + datePosted.getFullYear()
+  }
+  else {
+    var timeInMins = Math.floor(time / 60)
+    var hrs = Math.floor(timeInMins / 60)
+    var mns = timeInMins % 60
 
-  var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
-  var finalTime = hrsString + mns + 'm'
-  var textColor = time < 72000 ? (time < 600 ? { color: '#1000ff' } : null) : { color: '#ff0000' }
+    var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
+    finalTime = hrsString + mns + 'm'
+  }
+
+  var textColor = time < 72000 ? (time < 600 ? { color: '#1000ff' } : null) : (props.expiry > 0 ? { color: '#ff0000' } : null)
 
   return (
     <div className="post-card" style={null}>

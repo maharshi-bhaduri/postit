@@ -17,6 +17,7 @@ function ExpandPostModal(props) {
     var [noteContent, setNoteContent] = useState('Loading...')
     var [expiryString, setExpiryString] = useState('...')
     var expiry = 0
+    var postTimeRecorded = 0
     function closeModal() {
         props.onClose()
     }
@@ -34,18 +35,27 @@ function ExpandPostModal(props) {
                 data => {
                     noteContent = data['noteContent'];
                     expiry = data.expiresAt
+                    postTimeRecorded = data.postedAt
                     setNoteContent(noteContent)
-                    var time = (currentTime + (24 * 60000 * 60) - expiry) / 1000
-                    time = time < 0 ? 0 : time
-                    var timeInMins = Math.floor(time / 60)
-                    var hrs = Math.floor(timeInMins / 60)
-                    var mns = timeInMins % 60
+                    var time = (currentTime - postTimeRecorded) / 1000
+                    var finalTime = ''
 
-                    var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
-                    var finalTime = hrsString + mns + 'm'
-                    var textColorObject = time < 72000 ? (time < 600 ? { color: '#1000ff' } : null) : { color: '#ff0000' }
+                    if (time > 86400) {
+                        var datePosted = new Date(postTimeRecorded)
+                        finalTime = datePosted.getDate() + '/' + datePosted.getMonth() + '/' + datePosted.getFullYear()
+                    }
+                    else {
+                        var timeInMins = Math.floor(time / 60)
+                        var hrs = Math.floor(timeInMins / 60)
+                        var mns = timeInMins % 60
+
+                        var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
+                        finalTime = hrsString + mns + 'm'
+                    }
+                    var textColorObject = time < 72000 ? (time < 600 ? { color: '#1000ff' } : null) : (expiry > 0 ? { color: '#ff0000' } : null)
                     setExpiryString(finalTime)
                     setTextColor(textColorObject)
+                    console.log('finalTime ', finalTime)
                 }
             )
         }
