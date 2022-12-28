@@ -2,9 +2,6 @@ import React, { useEffect, useState } from "react";
 import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
 import IconButton from '@mui/material/IconButton';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-import FormControl from '@mui/material/FormControl';
-import Select, { SelectChangeEvent } from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
 
 
 function AddPostModal(props) {
@@ -20,7 +17,6 @@ function AddPostModal(props) {
     document.getElementById('post-input').value = ''
   }
   function handleExpiryChange(event) {
-    console.log(event.target.value)
     setExpiryTime(event.target.value)
   }
   function addPost() {
@@ -28,7 +24,6 @@ function AddPostModal(props) {
     let content = document.getElementById('post-input').value.trim()
     var noteId = ""
     if (content) {
-      console.log(expiryTime == -1 ? -1 : (Date.now() + (expiryTime * 60000 * 60)))
       fetch('https://updatenote.forgiveandforget.workers.dev/', {
         'method': 'post',
         'body': JSON.stringify({

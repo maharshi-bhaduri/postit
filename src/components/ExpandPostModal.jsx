@@ -3,21 +3,42 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import IconButton from '@mui/material/IconButton';
 
-
+var count = 0
 function ExpandPostModal(props) {
-    setInterval(updateTime, 1000)
-    const [currentTime, setCurrentTime] = useState(Date.now())
     const [textColor, setTextColor] = useState(null)
+    const [postTimeRecorded, setPostTimeRecorded] = useState(Date.now())
+    const [noteContent, setNoteContent] = useState('Loading...')
+    const [expiryString, setExpiryString] = useState('...')
+    const [currentTime, setCurrentTime] = useState(Date.now())
 
     function updateTime() {
-        const newCurrentTime = Date.now()
-        setCurrentTime(newCurrentTime)
+        setCurrentTime(Date.now())
     }
 
-    var [noteContent, setNoteContent] = useState('Loading...')
-    var [expiryString, setExpiryString] = useState('...')
+    useEffect(() => {
+        var time = (currentTime - postTimeRecorded) / 1000
+        var finalTime = ''
+
+        if (time > 86400) {
+            var datePosted = new Date(postTimeRecorded)
+            finalTime = datePosted.getDate() + '/' + datePosted.getMonth() + '/' + datePosted.getFullYear()
+        }
+        else {
+            var timeInMins = Math.floor(time / 60)
+            var hrs = Math.floor(timeInMins / 60)
+            var mns = timeInMins % 60
+
+            var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
+            finalTime = hrsString + mns + 'm'
+        }
+        var textColorObject = time < 72000 ? (time < 600 ? { color: '#1000ff' } : null) : (expiry > 0 ? { color: '#ff0000' } : null)
+        setExpiryString(finalTime)
+        setTextColor(textColorObject)
+    }
+        , [currentTime]
+    )
+
     var expiry = 0
-    var postTimeRecorded = 0
     function closeModal() {
         props.onClose()
     }
@@ -33,35 +54,17 @@ function ExpandPostModal(props) {
                 response => response.json()
             ).then(
                 data => {
-                    noteContent = data['noteContent'];
+                    console.log(data)
+                    var noteContentData = data['noteContent'];
                     expiry = data.expiresAt
-                    postTimeRecorded = data.postedAt
-                    setNoteContent(noteContent)
-                    var time = (currentTime - postTimeRecorded) / 1000
-                    var finalTime = ''
-
-                    if (time > 86400) {
-                        var datePosted = new Date(postTimeRecorded)
-                        finalTime = datePosted.getDate() + '/' + datePosted.getMonth() + '/' + datePosted.getFullYear()
-                    }
-                    else {
-                        var timeInMins = Math.floor(time / 60)
-                        var hrs = Math.floor(timeInMins / 60)
-                        var mns = timeInMins % 60
-
-                        var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
-                        finalTime = hrsString + mns + 'm'
-                    }
-                    var textColorObject = time < 72000 ? (time < 600 ? { color: '#1000ff' } : null) : (expiry > 0 ? { color: '#ff0000' } : null)
-                    setExpiryString(finalTime)
-                    setTextColor(textColorObject)
-                    console.log('finalTime ', finalTime)
+                    setPostTimeRecorded(data.postedAt)
+                    setNoteContent(noteContentData)
                 }
             )
         }
     }, [])
 
-
+    setInterval(updateTime, 1000)
     return (
         <div className="modal">
             <div className="overlay" onClick={closeModal}

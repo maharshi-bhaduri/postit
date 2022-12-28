@@ -12,14 +12,14 @@ function App() {
     const [addPostFlag, setAddPostFlag] = useState(false)
     const [expandPostFlag, setExpandPostFlag] = useState('')
     const [posts, setPosts] = useState([])
-    const [currentTime, setCurrentTime] = useState(Date.now())
+    // const [currentTime, setCurrentTime] = useState(Date.now())
 
-    function updateTime() {
-        const newCurrentTime = Date.now();
-        setCurrentTime(newCurrentTime);
-    }
+    // function updateTime() {
+    //     const newCurrentTime = Date.now();
+    //     setCurrentTime(newCurrentTime);
+    // }
 
-    setInterval(updateTime, 1000)
+    // setInterval(updateTime, 1000)
     useEffect(() => {
         getPosts();
     }, [])
@@ -64,7 +64,6 @@ function App() {
     function closeModal() {
         setAddPostFlag(false);
         setExpandPostFlag('')
-        console.log(posts)
     }
 
     function startPostModal() {
