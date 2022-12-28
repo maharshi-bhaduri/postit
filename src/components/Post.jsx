@@ -33,9 +33,14 @@ function Post(props) {
 
   return (
     <div className="post-card" style={null}>
-      {props.content.substring(0, 250)}
       {
-        props.content.length > 250 &&
+        props.content.length > 250 ? props.content.substring(0, 250) :
+          (
+            props.content.split(/\r?\n|\r|\n/g).length > 3 ? props.content.split(/\r?\n|\r|\n/g).slice(0, 3).join('\n') : props.content
+          )
+      }
+      {
+        (props.content.length > 250 || props.content.split(/\r?\n|\r|\n/g).length > 3) &&
         <p className='read-more' onClick={expand}>... Read more</p>
       }
       <div className="timebox top-right">
