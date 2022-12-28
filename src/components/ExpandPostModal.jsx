@@ -3,7 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import IconButton from '@mui/material/IconButton';
 
-var count = 0
+
 function ExpandPostModal(props) {
     const [textColor, setTextColor] = useState(null)
     const [postTimeRecorded, setPostTimeRecorded] = useState(Date.now())
