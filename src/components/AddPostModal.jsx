@@ -67,13 +67,13 @@ function AddPostModal(props) {
             <CloseRoundedIcon fontSize="large" />
           </IconButton>
         </div>
-        <textarea id='post-input' className="modal-text-area" autoFocus placeholder="Enter your post here...">
+        <textarea id='post-input' disabled={disableInput} className="modal-text-area" autoFocus placeholder="Enter your post here...">
         </textarea>
         <div className="post-sub-button">
           <div className="expiry-selector-container">
             <label>Expire post:</label>
-            <select name="expiryTime" className="expiry-time-selector" onChange={handleExpiryChange} >
-              <option valsue={-1}>Never</option>
+            <select name="expiryTime" disabled={disableInput} className="expiry-time-selector" onChange={handleExpiryChange}  >
+              <option value={-1}>Never</option>
               <option value={1}>1 hour</option>
               <option value={12}>12 hours</option>
               <option value={24}>24 hours</option>
