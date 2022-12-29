@@ -32,7 +32,7 @@ function Post(props) {
   var time = (currentTime - postTimeRecorded) / 1000
   if (time > 86400) {
     datePosted = new Date(postTimeRecorded)
-    finalTime = datePosted.getDate + '/' + datePosted.getMonth() + '/' + datePosted.getFullYear()
+    finalTime = datePosted.getDate() + '/' + (datePosted.getMonth() + 1) + '/' + datePosted.getFullYear()
   }
   else {
     var timeInMins = Math.floor(time / 60)

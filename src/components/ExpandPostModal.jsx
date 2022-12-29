@@ -6,39 +6,11 @@ import IconButton from '@mui/material/IconButton';
 
 function ExpandPostModal(props) {
     const [textColor, setTextColor] = useState(null)
-    const [postTimeRecorded, setPostTimeRecorded] = useState(Date.now())
-    const [noteContent, setNoteContent] = useState('Loading...')
-    const [expiryString, setExpiryString] = useState('...')
-    const [currentTime, setCurrentTime] = useState(Date.now())
-
-    function updateTime() {
-        setCurrentTime(Date.now())
-    }
-
-    useEffect(() => {
-        var time = (currentTime - postTimeRecorded) / 1000
-        var finalTime = ''
-
-        if (time > 86400) {
-            var datePosted = new Date(postTimeRecorded)
-            finalTime = datePosted.getDate() + '/' + datePosted.getMonth() + '/' + datePosted.getFullYear()
-        }
-        else {
-            var timeInMins = Math.floor(time / 60)
-            var hrs = Math.floor(timeInMins / 60)
-            var mns = timeInMins % 60
-
-            var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
-            finalTime = hrsString + mns + 'm'
-        }
-        var textColorObject = time < 72000 ? (time < 600 ? { color: '#1000ff' } : null) : (expiry > 0 ? { color: '#ff0000' } : null)
-        setExpiryString(finalTime)
-        setTextColor(textColorObject)
-    }
-        , [currentTime]
-    )
-
+    var [noteContent, setNoteContent] = useState('Loading...')
+    var [expiryString, setExpiryString] = useState('...')
     var expiry = 0
+    var retentionTime = 0
+
     function closeModal() {
         props.onClose()
     }
@@ -55,16 +27,40 @@ function ExpandPostModal(props) {
             ).then(
                 data => {
                     console.log(data)
-                    var noteContentData = data['noteContent'];
+                    noteContent = data['noteContent'];
                     expiry = data.expiresAt
-                    setPostTimeRecorded(data.postedAt)
-                    setNoteContent(noteContentData)
+                    var postTimeRecorded = data.postedAt
+
+                    retentionTime = Math.floor((expiry - postTimeRecorded) / 1000)
+
+                    setNoteContent(noteContent)
+                    var time = (Date.now() - postTimeRecorded) / 1000
+                    var finalTime = ''
+
+                    if (time > 86400) {
+                        var datePosted = new Date(postTimeRecorded)
+                        var d = String(datePosted.getDate())
+                        var m = String(datePosted.getMonth() + 1)
+                        var y = String(datePosted.getFullYear())
+
+                        finalTime = `${d}/${m}/${y}`
+                    }
+                    else {
+                        var timeInMins = Math.floor(time / 60)
+                        var hrs = Math.floor(timeInMins / 60)
+                        var mns = timeInMins % 60
+
+                        var hrsString = hrs > 0 ? String(hrs) + 'h ' : ''
+                        finalTime = hrsString + mns + 'm'
+                    }
+                    var textColorObject = time < (retentionTime * 0.9) ? (time < 600 ? { color: '#1000ff' } : null) : (expiry > 0 ? { color: '#ff0000' } : null)
+                    setExpiryString(finalTime)
+                    setTextColor(textColorObject)
                 }
             )
         }
-    }, [])
 
-    setInterval(updateTime, 1000)
+    }, [])
     return (
         <div className="modal">
             <div className="overlay" onClick={closeModal}
