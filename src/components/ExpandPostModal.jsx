@@ -26,7 +26,6 @@ function ExpandPostModal(props) {
                 response => response.json()
             ).then(
                 data => {
-                    console.log(data)
                     noteContent = data['noteContent'];
                     expiry = data.expiresAt
                     var postTimeRecorded = data.postedAt

@@ -90,14 +90,24 @@ function App() {
     )
 
     const content = isLoading ? <Loader /> : postsRenderer
+    const noPostContent = <p className="no-post">No posts to show</p>
 
     return (
         <div className="parent">
             <NavBar triggerPostModal={startPostModal} />
-            {/* <TextBox onAdd={addPost} /> */}
+            <div className="nav-spacer">
+            </div>
+            <div className="section-heading-posts">
+                <h2 >
+                    Posts
+                </h2>
+            </div>
             <div className="post-container">
                 {isLoading ? <Loader /> : content}
             </div>
+            {
+                posts.length == 0 && !isLoading && noPostContent
+            }
             {
                 addPostFlag && <AddPostModal onAdd={addPost} onClose={closeModal} />
             }
