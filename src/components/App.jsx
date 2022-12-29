@@ -12,6 +12,7 @@ function App() {
     const [addPostFlag, setAddPostFlag] = useState(false)
     const [expandPostFlag, setExpandPostFlag] = useState('')
     const [posts, setPosts] = useState([])
+    const year = (new Date()).getFullYear()
     // const [currentTime, setCurrentTime] = useState(Date.now())
 
     // function updateTime() {
@@ -114,7 +115,7 @@ function App() {
             {
                 expandPostFlag && <ExpandPostModal onDelete={deletePost} onClose={closeModal} name={expandPostFlag} />
             }
-
+            <footer>© {year} Maharshi Bhaduri Design</footer>
         </div>
     );
 }

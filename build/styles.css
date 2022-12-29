@@ -7,7 +7,9 @@ body {
   background: #404040;
 }
 
-#root {}
+#root {
+  height: 100%;
+}
 
 h2 {
   font-family: sans-serif;
@@ -24,9 +26,17 @@ p {
   width: 100%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
-  background-color: #404040;
+  /* background-color: #404040; */
+  font-family: sans-serif;
+}
+
+footer {
+  color: #83838366;
+  position: fixed;
+  bottom: 15px;
+  z-index: -1;
+  font-size: small;
 }
 
 /* Nav bar */
@@ -45,6 +55,12 @@ p {
 }
 
 .logo {
+  height: 100%;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.cred {
   height: 100%;
   margin-left: 10px;
   cursor: pointer;

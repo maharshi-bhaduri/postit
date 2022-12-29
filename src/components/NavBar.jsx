@@ -8,9 +8,11 @@ function NavBar(props) {
         props.triggerPostModal(true)
     }
     const logo = require('../img/logo_b.png');
+    const cred = require('../img/dev_cred.png');
     return (
         <div className="nav-container">
             <img src={logo} className="logo" draggable="false"></img>
+            <img src={cred} className="cred" draggable="false"></img>
             <IconButton
                 onClick={triggerAddPost}>
                 <AddCircleRoundedIcon fontSize="large" />
