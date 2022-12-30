@@ -96,8 +96,8 @@ footer {
 /* Nav Spacer */
 
 .nav-spacer {
-  display: block;
-  height: 80px;
+  display: inline-block;
+  margin-top: 80px;
   width: 100%;
 }
 
