@@ -4,12 +4,14 @@ import ExpandPostModal from "./ExpandPostModal";
 import NavBar from "./NavBar";
 import Post from './Post';
 import AddPostModal from "./AddPostModal";
+import InfoModal from "./InfoModal";
 
 
 function App() {
 
     const [isLoading, setIsLoading] = useState(true)
     const [addPostFlag, setAddPostFlag] = useState(false)
+    const [infoFlag, setInfoFlag] = useState(false)
     const [expandPostFlag, setExpandPostFlag] = useState('')
     const [posts, setPosts] = useState([])
     const year = (new Date()).getFullYear()
@@ -71,11 +73,19 @@ function App() {
 
     function closeModal() {
         setAddPostFlag(false);
-        setExpandPostFlag('')
+        // setExpandPostFlag('')
+    }
+
+    function closeInfoModal() {
+        setInfoFlag(false);
     }
 
     function startPostModal() {
         setAddPostFlag(true)
+    }
+
+    function startInfoModal() {
+        setInfoFlag(true)
     }
 
     function expandPost(expandPostName) {
@@ -102,7 +112,7 @@ function App() {
 
     return (
         <div className="parent">
-            <NavBar triggerPostModal={startPostModal} />
+            <NavBar triggerPostModal={startPostModal} triggerInfoModal={startInfoModal} />
             <div className="nav-spacer">
             </div>
             <div className="section-heading-posts">
@@ -121,6 +131,9 @@ function App() {
             }
             {
                 expandPostFlag && <ExpandPostModal onDelete={deletePost} onClose={closeModal} name={expandPostFlag} />
+            }
+            {
+                infoFlag && <InfoModal onClose={closeInfoModal} />
             }
             <footer>© {year} Maharshi Bhaduri Design</footer>
         </div>

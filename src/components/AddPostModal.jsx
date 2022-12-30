@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import AddCircleRoundedIcon from '@mui/icons-material/AddCircleRounded';
+import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 
@@ -74,8 +74,8 @@ function AddPostModal(props) {
               <option value={24}>24 hours</option>
             </select>
           </div>
-          <IconButton disabled={disableInput} onClick={addPost} >
-            <AddCircleRoundedIcon fontSize="large" />
+          <IconButton disabled={disableInput} onClick={addPost} className='send-button' >
+            <SendIcon fontSize="medium" />
           </IconButton>
         </div>
       </div>

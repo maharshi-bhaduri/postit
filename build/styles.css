@@ -48,11 +48,27 @@ footer {
   display: flex;
   margin-bottom: 30px;
   align-items: center;
+  justify-content: space-between;
   position: fixed;
   top: 0;
   z-index: 1;
   box-shadow: 0px 5px 30px black;
 }
+
+.nav-func-group {
+  height: 100%;
+  background-color: #f8f6cd;
+  display: flex;
+  align-items: center;
+  top: 0;
+  z-index: 1;
+}
+
+.nav-help-group {
+  z-index: 1;
+  margin-right: 20px;
+}
+
 
 .logo {
   height: 100%;
@@ -64,6 +80,10 @@ footer {
   height: 100%;
   margin-left: 10px;
   cursor: pointer;
+}
+
+.sign {
+  height: 50px;
 }
 
 .add-post {
@@ -83,7 +103,7 @@ footer {
 /* Section Heading Posts */
 
 .section-heading-posts {
-  color: #b1b1b1;
+  color: #d3d3d3;
   margin-left: 50px;
   text-align: left;
   width: 80%;
@@ -164,7 +184,7 @@ input::placeholder {
 
 .post-card {
   margin: 10px;
-  padding: 25px 15px 45px 15px;
+  padding: 25px 15px 50px 15px;
   min-width: 80px;
   max-width: 250px;
   display: inline-block;
@@ -310,6 +330,10 @@ label {
   align-items: center;
 }
 
+.send-button {
+  margin-right: 10px;
+}
+
 .delete-button {
   position: absolute;
   bottom: 5px;
@@ -331,7 +355,6 @@ label {
   background: #f8f6cd;
   border-radius: 10px;
   margin-bottom: 10px;
-  margin-top: 80px;
   box-shadow: 0px 0px 5px black;
   transform: translate(-50%, -50%);
   -ms-transform: translate(-50%, -50%);

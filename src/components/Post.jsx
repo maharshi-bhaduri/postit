@@ -57,7 +57,7 @@ function Post(props) {
         (props.content.length > 250 || props.content.split(/\r?\n|\r|\n/g).length > 3) &&
         <p className='read-more' onClick={expand}>... Read more</p>
       }
-      <div className="timebox top-right">
+      <div className="timebox bottom-left">
         <img className="timeleft-icon" src={require('../img/clock.png')} />
         <p className="timeleft-text" style={textColor}>{finalTime}</p>
       </div>
