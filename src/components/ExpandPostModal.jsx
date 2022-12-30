@@ -20,7 +20,7 @@ function ExpandPostModal(props) {
     }
     useEffect(() => {
         if (props.name) {
-            fetch('https://fetchnote.forgiveandforget.workers.dev/?noteId=' + String(props.name), {
+            fetch('https://fetchnote.postcloud.workers.dev/?noteId=' + String(props.name), {
                 'method': 'get'
             }).then(
                 response => response.json()

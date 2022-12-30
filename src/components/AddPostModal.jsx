@@ -24,7 +24,7 @@ function AddPostModal(props) {
     let content = document.getElementById('post-input').value.trim()
     var noteId = ""
     if (content) {
-      fetch('https://updatenote.forgiveandforget.workers.dev/', {
+      fetch('https://updatenote.postcloud.workers.dev/', {
         'method': 'post',
         'body': JSON.stringify({
           'noteContent': content,

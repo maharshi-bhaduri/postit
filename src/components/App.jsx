@@ -26,7 +26,7 @@ function App() {
     }, [])
 
     const getPosts = () => {
-        fetch('https://listnotes.forgiveandforget.workers.dev/').then(
+        fetch('https://listnotes.postcloud.workers.dev/').then(
             response => response.json()
         ).then(
             data => {
@@ -51,15 +51,28 @@ function App() {
     }
 
     function deletePost(deleteName) {
-        fetch('https://deletenote.forgiveandforget.workers.dev/', {
+        fetch('https://deletenote.postcloud.workers.dev/', {
             'method': 'post',
             'body': JSON.stringify({
                 noteId: deleteName
             })
-        })
-        setPosts(oldposts => {
-            return oldposts.filter((item) => { return item.name !== deleteName });
-        });
+        }).then(
+            response => response.json()
+        ).then(
+            data => {
+                if (data.status == 'success') {
+                    setPosts(oldposts => {
+                        return oldposts.filter((item) => { return item.name !== deleteName });
+                    });
+                }
+
+                // setPosts(data)
+                // setIsLoading(false)
+                // posts.sort((a, b) => {
+                //     return a.expiry - b.expiry;
+                // });
+            }
+        )
     }
 
     function closeModal() {
