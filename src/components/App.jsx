@@ -65,12 +65,6 @@ function App() {
                         return oldposts.filter((item) => { return item.name !== deleteName });
                     });
                 }
-
-                // setPosts(data)
-                // setIsLoading(false)
-                // posts.sort((a, b) => {
-                //     return a.expiry - b.expiry;
-                // });
             }
         )
     }
