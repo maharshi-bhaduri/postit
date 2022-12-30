@@ -73,7 +73,7 @@ function App() {
 
     function closeModal() {
         setAddPostFlag(false);
-        // setExpandPostFlag('')
+        setExpandPostFlag('')
     }
 
     function closeInfoModal() {
