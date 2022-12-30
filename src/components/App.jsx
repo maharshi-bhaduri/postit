@@ -73,10 +73,7 @@ function App() {
 
     function closeModal() {
         setAddPostFlag(false);
-        setExpandPostFlag('')
-    }
-
-    function closeInfoModal() {
+        setExpandPostFlag('');
         setInfoFlag(false);
     }
 
@@ -116,7 +113,7 @@ function App() {
             <div className="nav-spacer">
             </div>
             <div className="section-heading-posts">
-                <h2 >
+                <h2>
                     Posts
                 </h2>
             </div>
@@ -133,7 +130,7 @@ function App() {
                 expandPostFlag && <ExpandPostModal onDelete={deletePost} onClose={closeModal} name={expandPostFlag} />
             }
             {
-                infoFlag && <InfoModal onClose={closeInfoModal} />
+                infoFlag && <InfoModal onClose={closeModal} />
             }
             <footer>© {year} Maharshi Bhaduri Design</footer>
         </div>

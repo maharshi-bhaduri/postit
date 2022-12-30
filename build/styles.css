@@ -95,16 +95,17 @@ footer {
 
 /* Nav Spacer */
 
-.nav-spacer {
+/* .nav-spacer {
   display: block;
   margin: 80px 0px 0px 0px;
-}
+} */
 
 /* Section Heading Posts */
 
 .section-heading-posts {
   color: #d3d3d3;
   margin-left: 50px;
+  margin-top: 80px;
   text-align: left;
   width: 80%;
 }
