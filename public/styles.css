@@ -96,7 +96,7 @@ footer {
 /* Nav Spacer */
 
 .nav-spacer {
-  display: inline-block;
+  display: block;
   margin: 80px 0px 0px 0px;
 }
 
