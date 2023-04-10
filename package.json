@@ -6,14 +6,20 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
+    "@auth0/auth0-react": "^2.0.1",
     "@emotion/react": "^11.10.5",
     "@emotion/styled": "^11.10.5",
     "@mui/icons-material": "^5.11.0",
     "@mui/material": "^5.11.2",
+    "crypto": "^1.0.1",
+    "crypto-browserify": "^3.12.0",
     "gh-pages": "3.2.3",
-    "react-scripts": "^5.0.1"
+    "react-router-dom": "^6.10.0",
+    "react-scripts": "^5.0.1",
+    "sha1": "^1.1.1"
   },
   "devDependencies": {
+    "dotenv": "^16.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "typescript": "3.3.3"

@@ -2,9 +2,10 @@ import React, { useState, useEffect } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import IconButton from '@mui/material/IconButton';
+import { useParams } from "react-router-dom";
 
 
-function ExpandPostModal(props) {
+function PostPage(props) {
     const [textColor, setTextColor] = useState(null)
     var [noteContent, setNoteContent] = useState('Loading...')
     var [userName, setUserName] = useState('...')
@@ -12,29 +13,26 @@ function ExpandPostModal(props) {
     const [noteUUID, setNoteUUID] = useState('1')
     var expiry = 0
     var retentionTime = 0
+    const uuid = localStorage.getItem('uuid') || ''
+    const { id } = useParams();
 
-    function closeModal() {
-        props.onClose()
-    }
     function onDeleteClick() {
-        props.onDelete(props.name)
-        props.onClose()
+        props.onDelete(id)
+        // props.onClose()
     }
     useEffect(() => {
-        if (props.name) {
-            fetch('https://fetchnote.postcloud.workers.dev/?noteId=' + String(props.name), {
+        if (id) {
+            fetch('https://fetchnote.postcloud.workers.dev/?noteId=' + String(id), {
                 'method': 'get'
             }).then(
                 response => response.json()
             ).then(
                 data => {
                     noteContent = data['noteContent'];
-
                     expiry = data.expiresAt
                     var postTimeRecorded = data.postedAt
 
                     retentionTime = Math.floor((expiry - postTimeRecorded) / 1000)
-
                     setNoteContent(noteContent)
                     setUserName(data['userName'])
                     setNoteUUID(data['uuid'])
@@ -66,18 +64,15 @@ function ExpandPostModal(props) {
 
     }, [])
     return (
-        <div className="modal">
-            <div className="overlay" onClick={closeModal}
-            ></div>
-            <div id='modal' className="expand-post-modal ">
-
-                <div className="pc-user-name">
-                    {userName}
-                </div>
-                <div className="btn-top-right">
+        <div className="post-card-solo-wrapper">
+            <div id='modal' className="post-card-solo">
+                {/* <div className="btn-top-right">
                     <IconButton onClick={closeModal} >
                         <CloseRoundedIcon fontSize="large" />
                     </IconButton>
+                </div> */}
+                <div className="pc-user-name">
+                    {userName}
                 </div>
                 <div className="modal-content">
                     {noteContent}
@@ -85,15 +80,21 @@ function ExpandPostModal(props) {
                 <div className="timebox bottom-left">
                     <img className="timeleft-icon" src={require('../img/clock.png')} />
                     <p className="timeleft-text" style={textColor}>{expiryString}</p>
+
                 </div>
-                <div className="delete-button">
-                    <IconButton aria-label="delete" onClick={onDeleteClick}>
-                        <DeleteIcon />
-                    </IconButton>
-                </div>
+
+                {
+                    (uuid == noteUUID || noteUUID == '') &&
+                    < div className="delete-button">
+                        <IconButton aria-label="delete" onClick={onDeleteClick}>
+                            <DeleteIcon fontSize="small" />
+                        </IconButton>
+                    </div>
+
+                }
             </div>
         </div>
     );
 }
 
-export default ExpandPostModal;
+export default PostPage;

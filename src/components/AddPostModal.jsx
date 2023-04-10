@@ -2,19 +2,25 @@ import React, { useEffect, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
-
+import { useNavigate } from "react-router-dom";
 
 function AddPostModal(props) {
   var [disableInput, setDisableInput] = useState(false)
   var [expiryTime, setExpiryTime] = useState(-1)
+  const { user } = props;
+
+  const uuid = localStorage.getItem('uuid') || ''
+
+  let navigate = useNavigate();
+
   var expiry = -1
   if (expiryTime !== -1) {
     expiry = Date.now() + (expiryTime * 60000 * 60)
   }
 
   function closeModal() {
-    props.onClose()
     document.getElementById('post-input').value = ''
+    props.onClose()
   }
   function handleExpiryChange(event) {
     setExpiryTime(event.target.value)
@@ -22,15 +28,21 @@ function AddPostModal(props) {
   function addPost() {
     setDisableInput(true)
     let content = document.getElementById('post-input').value.trim()
-    var noteId = ""
+    var noteId = "";
+
     if (content) {
+      let dataPackage = {
+        'noteContent': content,
+        'expiry': expiryTime == -1 ? -1 : (Date.now() + (expiryTime * 60000 * 60)),
+        'postTime': Date.now()
+      }
+      if (user && user.name && user.sub) {
+        dataPackage['userName'] = user.name;
+        dataPackage['uuid'] = uuid;
+      }
       fetch('https://updatenote.postcloud.workers.dev/', {
         'method': 'post',
-        'body': JSON.stringify({
-          'noteContent': content,
-          'expiry': expiryTime == -1 ? -1 : (Date.now() + (expiryTime * 60000 * 60)),
-          'postTime': Date.now()
-        })
+        'body': JSON.stringify(dataPackage)
       }).then(
         response => response.json()
       ).then(
@@ -41,7 +53,9 @@ function AddPostModal(props) {
             'metadata': {
               'value': content,
               'expiry': expiry,
-              'postTime': Date.now()
+              'postTime': Date.now(),
+              'userName': user && user.name ? user.name : '',
+              'uuid': uuid
             }
           }
           props.onAdd(tempData)
@@ -51,6 +65,7 @@ function AddPostModal(props) {
     else {
       props.onClose()
     }
+    navigate('/');
   }
   return (
     <div className="modal">

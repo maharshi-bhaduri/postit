@@ -8,7 +8,7 @@ body {
 }
 
 #root {
-  height: 100%;
+  /* height: 100%; */
 }
 
 h2 {
@@ -20,7 +20,7 @@ p {
 }
 
 .parent {
-  height: 100%;
+  /* height: 100%; */
   padding: 0px;
   padding-top: 1px;
   margin: 0px;
@@ -44,31 +44,61 @@ footer {
 .nav-container {
   width: 100%;
   height: 60px;
-  background-color: #f8f6cd;
+  right: auto;
+  left: 0px;
   display: flex;
   margin-bottom: 30px;
   align-items: center;
-  justify-content: space-between;
+  justify-content: center;
   position: fixed;
   top: 0;
   z-index: 1;
-  box-shadow: 0px 5px 30px black;
+}
+
+.nav-content-wrapper {
+  height: 100%;
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  background: #f8f6cd;
+  box-shadow: 0px 5px 20px 1px #00000075;
 }
 
 .nav-func-group {
   height: 100%;
-  background-color: #f8f6cd;
   display: flex;
   align-items: center;
   top: 0;
   z-index: 1;
+}
+
+.nav-logo {
+  height: 100%;
 }
 
 .nav-help-group {
   z-index: 1;
   margin-right: 20px;
+  display: flex;
+  align-items: center;
 }
 
+.profile-pic-container {
+  display: flex;
+  align-items: center;
+}
+
+.profile-pic {
+  height: 30px;
+  border-radius: 50%;
+  border: 5px solid #0000001f;
+}
+
+.account-menu {
+  padding: 0px;
+  position: fixed;
+  z-index: 2;
+}
 
 .logo {
   height: 100%;
@@ -181,13 +211,38 @@ input::placeholder {
 
 .no-post {
   color: #838383;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .post-card {
   margin: 10px;
-  padding: 25px 15px 50px 15px;
+  padding: 50px 15px 50px 15px;
   min-width: 95px;
   max-width: 250px;
+  display: inline-block;
+  align-items: center;
+  background: #f8f6cd;
+  font-family: sans-serif;
+  border-radius: 10px;
+  position: relative;
+  box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
+
+.post-card-solo-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  width: 100%;
+}
+
+.post-card-solo {
+  margin: 30% 0%;
+  padding: 50px 20px;
+  width: 70%;
   display: inline-block;
   align-items: center;
   background: #f8f6cd;
@@ -209,6 +264,27 @@ input::placeholder {
 .read-more:hover {
   text-decoration: solid underline;
   color: black;
+}
+
+/* User Name */
+
+.pc-user-name {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  font-size: 12px;
+  font-family: system-ui;
+  font-weight: 500;
+  color: #00000094;
+}
+
+
+/* Launch Icon */
+
+.launch-icon {
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }
 
 /* Time Icon */
@@ -343,7 +419,7 @@ label {
 
 .expand-post-modal {
   position: fixed;
-  top: 40%;
+  top: 50%;
   left: 50%;
   z-index: 2;
   padding: 50px 30px;
@@ -376,7 +452,17 @@ label {
     width: 50%;
   }
 
+  .post-card-solo {
+    width: 60%;
+    margin: 10%;
+  }
+
   .expand-post-modal {
     width: 50%;
+  }
+
+  .nav-content-wrapper {
+    width: 80%;
+    border-radius: 0px 0px 25px 25px;
   }
 }

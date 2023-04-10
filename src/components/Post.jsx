@@ -1,16 +1,13 @@
 import React, { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
 import IconButton from '@mui/material/IconButton';
+import LaunchIcon from '@mui/icons-material/Launch';
+import { Link } from "react-router-dom";
 
 
 function Post(props) {
-  setInterval(updateTime, 1000)
-  const [currentTime, setCurrentTime] = useState(Date.now())
-
-  function updateTime() {
-    const newCurrentTime = Date.now()
-    setCurrentTime(newCurrentTime)
-  }
+  const uuid = localStorage.getItem('uuid');
+  const currentTime = Date.now();
 
   function onDeleteClick() {
     props.onDelete(props.name)
@@ -47,6 +44,21 @@ function Post(props) {
 
   return (
     <div className="post-card" style={null}>
+      <div className="pc-user-name">
+        {
+          props.userName ? props.userName.length > 9 ?
+            props.userName.split(' ')[0].length > 9 ? props.userName.split(' ')[0].substring(0, 9) : props.userName.split(' ')[0]
+            : props.userName : ''
+        }
+      </div>
+      <div className="launch-icon">
+        <Link to={`/post/${props.name}`}>
+          <IconButton >
+            <LaunchIcon fontSize="small" />
+          </IconButton>
+        </Link>
+
+      </div>
       {
         props.content.length > 250 ? props.content.substring(0, 250) :
           (
@@ -62,10 +74,10 @@ function Post(props) {
         <p className="timeleft-text" style={textColor}>{finalTime}</p>
       </div>
       {
-        props.name.length == 40 &&
+        (props.uuid == uuid || props.uuid == '') &&
         <div className="delete-button">
           <IconButton aria-label="delete" onClick={onDeleteClick}>
-            <DeleteIcon />
+            <DeleteIcon fontSize="small" />
           </IconButton>
         </div>
       }
