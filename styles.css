@@ -78,13 +78,12 @@ footer {
 }
 
 .profile-pic-container {
-  margin: 0px 10px;
   display: flex;
   align-items: center;
 }
 
 .profile-pic {
-  height: 45px;
+  height: 30px;
   border-radius: 50%;
   border: 5px solid #0000001f;
 }
@@ -206,6 +205,8 @@ input::placeholder {
 
 .no-post {
   color: #838383;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .post-card {
@@ -258,6 +259,18 @@ input::placeholder {
   text-decoration: solid underline;
   color: black;
 }
+
+/* User Name */
+
+.pc-user-name {
+  position: absolute;
+  top: 15px;
+  font-size: 12px;
+  font-family: system-ui;
+  font-weight: 500;
+  color: #00000094;
+}
+
 
 /* Launch Icon */
 
