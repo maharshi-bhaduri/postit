@@ -2,11 +2,15 @@ import React, { useEffect, useState } from "react";
 import SendIcon from '@mui/icons-material/Send';
 import IconButton from '@mui/material/IconButton';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
 import { useNavigate } from "react-router-dom";
 
 function AddPostModal(props) {
   var [disableInput, setDisableInput] = useState(false)
   var [expiryTime, setExpiryTime] = useState(-1)
+  const [hidden, setHidden] = useState(false)
+
   const { user } = props;
 
   const uuid = localStorage.getItem('uuid') || ''
@@ -18,6 +22,9 @@ function AddPostModal(props) {
     expiry = Date.now() + (expiryTime * 60000 * 60)
   }
 
+  function toggleHidden() {
+    setHidden(!hidden)
+  }
   function closeModal() {
     document.getElementById('post-input').value = ''
     props.onClose()
@@ -39,6 +46,7 @@ function AddPostModal(props) {
       if (user && user.name && user.sub) {
         dataPackage['userName'] = user.name;
         dataPackage['uuid'] = uuid;
+        dataPackage['hidden'] = hidden;
       }
       fetch('https://updatenote.postcloud.workers.dev/', {
         'method': 'post',
@@ -65,7 +73,7 @@ function AddPostModal(props) {
     else {
       props.onClose()
     }
-    navigate('/');
+    navigate('/posts');
   }
   return (
     <div className="modal">
@@ -81,6 +89,11 @@ function AddPostModal(props) {
         </textarea>
         <div className="post-sub-button">
           <div className="expiry-selector-container">
+            {uuid !== '' &&
+              <IconButton disabled={disableInput} onClick={toggleHidden} >
+                {hidden ? <VisibilityOffIcon fontSize="small" /> : <VisibilityIcon fontSize="small" />}
+              </IconButton>
+            }
             <label>Expire post:</label>
             <select name="expiryTime" disabled={disableInput} className="expiry-time-selector" onChange={handleExpiryChange}  >
               <option value={-1}>Never</option>
@@ -94,7 +107,7 @@ function AddPostModal(props) {
           </IconButton>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

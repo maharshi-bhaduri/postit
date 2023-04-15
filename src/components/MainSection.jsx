@@ -3,10 +3,10 @@ import ExpandPostModal from "./ExpandPostModal";
 import NavBar from "./NavBar";
 import AddPostModal from "./AddPostModal";
 import InfoModal from "./InfoModal";
-import PublicPosts from "./PublicPosts";
+import PostsSection from "./PostsSection";
 import PostPage from "./PostPage";
 import { useNavigate } from "react-router-dom";
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { HashRouter as Router, Route, Routes } from 'react-router-dom';
 
 
 function MainSection(props) {
@@ -57,23 +57,10 @@ function MainSection(props) {
 
 
     function deletePost(deleteName) {
-        fetch('https://deletenote.postcloud.workers.dev/', {
-            'method': 'post',
-            'body': JSON.stringify({
-                noteId: deleteName
-            })
-        }).then(
-            response => response.json()
-        ).then(
-            data => {
-                if (data.status == 'success') {
-                    setPosts(oldposts => {
-                        return oldposts.filter((item) => { return item.name !== deleteName });
-                    });
-                    navigate('/');
-                }
-            }
-        )
+        setPosts(oldposts => {
+            return oldposts.filter((item) => { return item.name !== deleteName });
+        });
+        navigate('/posts');
     }
 
     function closeModal() {
@@ -107,10 +94,9 @@ function MainSection(props) {
                 infoFlag && <InfoModal onClose={closeModal} />
             }
             <Routes>
-                <Route exact path='/' element={<PublicPosts onExpand={expandPost} postList={posts} onDelete={deletePost} />} >
-                    {/* <PublicPosts onExpand={expandPost} postList={posts} onDelete={deletePost} /> */}
+                <Route exact path='/' element={<PostsSection onExpand={expandPost} postList={posts} onDelete={deletePost} />} >
                 </Route>
-                <Route exact path='/post/:id' element={<PostPage onDelete={deletePost} />}>
+                <Route exact path='/:id' element={<PostPage onDelete={deletePost} />}>
                     {/* <PostPage ></PostPage> */}
                 </Route>
             </Routes>

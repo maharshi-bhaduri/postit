@@ -7,10 +7,6 @@ body {
   background: #404040;
 }
 
-#root {
-  /* height: 100%; */
-}
-
 h2 {
   font-family: sans-serif;
 }
@@ -18,6 +14,48 @@ h2 {
 p {
   font-family: sans-serif;
 }
+
+/* Landing */
+
+.landing-container {
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.landing-text {
+  font-family: 'Mynerve', cursive;
+  color: #d3d3d3;
+  font-size: 50px;
+  display: inline-block;
+}
+
+.postit {
+  display: inline-block;
+  width: 130px;
+  height: 130px;
+  transform: rotate(-5deg);
+  background: #fffaa3;
+  box-shadow: 2px 10px 10px rgba(0, 0, 0, 0.3);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.cta-postcloud {
+  display: inherit;
+}
+
+img {
+  height: 80px;
+  margin-top: 0px;
+}
+
 
 .parent {
   /* height: 100%; */
@@ -135,7 +173,6 @@ footer {
 
 .section-heading-posts {
   color: #d3d3d3;
-  margin-left: 50px;
   text-align: left;
   width: 80%;
 }
@@ -192,21 +229,52 @@ input::placeholder {
 .post-container {
   display: flex;
   flex-wrap: wrap;
-  width: 80%;
+  flex-direction: column;
+  width: 95%;
   align-items: center;
+  justify-content: center;
 }
 
-.loading-card {
-  margin: 10px 0 10px 0;
-  padding: 15px;
-  display: flex;
-  align-items: center;
-  background: #d6d6d6;
-  border-radius: 10px;
-  /* position: absolute; */
-  top: 80px;
-  font-family: sans-serif;
-  box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
+.loader {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid #00000000;
+  border-width: 8px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 2s linear infinite;
+}
+
+.loader-black {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  margin: auto;
+  border: 16px solid #303030b5;
+  border-top: 16px solid #00000000;
+  border-width: 8px;
+  border-radius: 50%;
+  width: 25px;
+  height: 25px;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
 }
 
 .no-post {
@@ -217,9 +285,10 @@ input::placeholder {
 
 .post-card {
   margin: 10px;
-  padding: 50px 15px 50px 15px;
-  min-width: 95px;
-  max-width: 250px;
+  padding: 50px 15px 50px 25px;
+  /* min-width: 95px;
+  max-width: 250px; */
+  width: 80%;
   display: inline-block;
   align-items: center;
   background: #f8f6cd;
@@ -242,7 +311,7 @@ input::placeholder {
 .post-card-solo {
   margin: 30% 0%;
   padding: 50px 20px;
-  width: 70%;
+  width: 80%;
   display: inline-block;
   align-items: center;
   background: #f8f6cd;
@@ -252,6 +321,12 @@ input::placeholder {
   box-shadow: 1px 2px 2px rgb(0 0 0 / 15%);
   word-wrap: break-word;
   white-space: pre-wrap;
+}
+
+.deleting {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.5s ease-in-out;
 }
 
 .read-more {
@@ -389,6 +464,8 @@ label {
 .expiry-selector-container {
   font-family: sans-serif;
   font-size: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .expiry-time-selector, .expiry-time-selector * {
@@ -457,6 +534,10 @@ label {
     margin: 10%;
   }
 
+  .post-card {
+    width: 80%;
+  }
+
   .expand-post-modal {
     width: 50%;
   }
@@ -464,5 +545,9 @@ label {
   .nav-content-wrapper {
     width: 80%;
     border-radius: 0px 0px 25px 25px;
+  }
+
+  .post-container {
+    width: 80%;
   }
 }

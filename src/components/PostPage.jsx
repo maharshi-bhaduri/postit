@@ -3,6 +3,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded';
 import IconButton from '@mui/material/IconButton';
 import { useParams } from "react-router-dom";
+import Loader from "./Loader";
 
 
 function PostPage(props) {
@@ -11,15 +12,32 @@ function PostPage(props) {
     var [userName, setUserName] = useState('...')
     var [expiryString, setExpiryString] = useState('...')
     const [noteUUID, setNoteUUID] = useState('1')
+    const [deleting, setDeleting] = useState(false)
     var expiry = 0
     var retentionTime = 0
     const uuid = localStorage.getItem('uuid') || ''
     const { id } = useParams();
 
     function onDeleteClick() {
-        props.onDelete(id)
-        // props.onClose()
+        setDeleting(true)
+        console.log('Deleting note')
+        fetch('https://deletenote.postcloud.workers.dev/', {
+            'method': 'post',
+            'body': JSON.stringify({
+                noteId: id
+            }),
+        }).then(
+            response => response.json()
+        ).then(
+            data => {
+                if (data.status == 'success') {
+                    props.onDelete(id)
+                }
+            }
+        )
+        console.log('Deleted note')
     }
+
     useEffect(() => {
         if (id) {
             fetch('https://fetchnote.postcloud.workers.dev/?noteId=' + String(id), {
@@ -65,14 +83,12 @@ function PostPage(props) {
     }, [])
     return (
         <div className="post-card-solo-wrapper">
-            <div id='modal' className="post-card-solo">
-                {/* <div className="btn-top-right">
-                    <IconButton onClick={closeModal} >
-                        <CloseRoundedIcon fontSize="large" />
-                    </IconButton>
-                </div> */}
+            <div id='modal' className={`post-card-solo ${deleting ? 'deleting' : ''}`}>
+                {deleting && <Loader type="black" />}
                 <div className="pc-user-name">
-                    {userName}
+                    {
+                        userName ? userName : <i>Anonymous</i>
+                    }
                 </div>
                 <div className="modal-content">
                     {noteContent}

@@ -33,11 +33,16 @@ function NavBar(props) {
     const logo = require('../img/logo_b.png');
     const { user, isAuthenticated, isLoading } = useAuth0();
 
+    function handleLogout() {
+        logout({ logoutParams: { returnTo: window.location.origin } })
+        localStorage.clear();
+    }
+
     return (
         <div className="nav-container">
             <div className="nav-content-wrapper">
                 <div className="nav-func-group">
-                    <Link to='/' className="nav-logo">
+                    <Link to='/posts' className="nav-logo">
                         <img src={logo} className="logo" draggable="false"></img>
                     </Link>
 
@@ -83,8 +88,7 @@ function NavBar(props) {
                                 }}
                                 className="account-menu"
                             >
-                                <MenuItem>Private Posts</MenuItem>
-                                <MenuItem onClick={() => logout({ logoutParams: { returnTo: window.location.origin } })}>Logout</MenuItem>
+                                <MenuItem onClick={handleLogout}>Logout</MenuItem>
                             </Menu>
                         </div>
                     }

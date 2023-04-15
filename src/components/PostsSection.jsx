@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Loader from "./Loader";
 import Post from './Post';
 
-function PublicPosts(props) {
+function PostsSection(props) {
     const [isLoading, setIsLoading] = useState(true);
     const [postsRenderer, setPostsRenderer] = useState(null);
     const noPostText = <p className="no-post">No posts to show 🫥</p>
@@ -39,19 +39,21 @@ function PublicPosts(props) {
     function deletePost(deletePostName) {
         props.onDelete(deletePostName);
     }
+    if (!isLoading && postsRenderer && (postsRenderer.length > 0)) {
+        console.log('posts are ready')
+    }
 
     return (
         <div className="parent">
             <div className="nav-spacer"></div>
             <div className="section-heading-posts">
-                <h2>Public Posts</h2>
+                <h2>Feed</h2>
             </div>
             <div className="post-container">
-                {postsRenderer ? postsRenderer.length > 0 ? postsRenderer : noPostText : noPostText}
-                {isLoading && <Loader />}
+                {isLoading ? <Loader /> : (postsRenderer && postsRenderer.length > 0 ? postsRenderer : noPostText)}
             </div>
         </div>
     );
 }
 
-export default PublicPosts;
+export default PostsSection;

@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from "react";
 
-function Loader() {
+function Loader(props) {
     return (
-        <div className="loading-card">
-            Loading...
+        <div className={`loader ${props.type == 'black' ? 'loader-black' : ''}`}>
         </div>
     );
 }
