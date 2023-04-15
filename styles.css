@@ -173,7 +173,6 @@ footer {
 
 .section-heading-posts {
   color: #d3d3d3;
-  margin-left: 50px;
   text-align: left;
   width: 80%;
 }
@@ -273,7 +272,7 @@ input::placeholder {
   padding: 50px 15px 50px 25px;
   /* min-width: 95px;
   max-width: 250px; */
-  width: 100%;
+  width: 80%;
   display: inline-block;
   align-items: center;
   background: #f8f6cd;
@@ -296,7 +295,7 @@ input::placeholder {
 .post-card-solo {
   margin: 30% 0%;
   padding: 50px 20px;
-  width: 70%;
+  width: 80%;
   display: inline-block;
   align-items: center;
   background: #f8f6cd;
