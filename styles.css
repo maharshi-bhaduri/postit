@@ -230,8 +230,10 @@ input::placeholder {
 .post-container {
   display: flex;
   flex-wrap: wrap;
+  flex-direction: column;
   width: 95%;
   align-items: center;
+  justify-content: center;
 }
 
 .loader {
@@ -268,9 +270,10 @@ input::placeholder {
 
 .post-card {
   margin: 10px;
-  padding: 50px 15px 50px 15px;
-  min-width: 95px;
-  max-width: 250px;
+  padding: 50px 15px 50px 25px;
+  /* min-width: 95px;
+  max-width: 250px; */
+  width: 100%;
   display: inline-block;
   align-items: center;
   background: #f8f6cd;
@@ -440,6 +443,8 @@ label {
 .expiry-selector-container {
   font-family: sans-serif;
   font-size: 15px;
+  display: flex;
+  align-items: center;
 }
 
 .expiry-time-selector, .expiry-time-selector * {
@@ -506,6 +511,10 @@ label {
   .post-card-solo {
     width: 60%;
     margin: 10%;
+  }
+
+  .post-card {
+    width: 80%;
   }
 
   .expand-post-modal {
